@@ -33,4 +33,8 @@ echo "$pw" > "/tmp/${name}_pw"
 useradd -m -g sudo -s /bin/bash "$name" >/dev/null 2>&1 ||
   usermod -a -G sudo "$name" && mkdir -p /home/"$name" && chown "$name":sudo /home/"$name"
 echo "$name:$pw" | chpasswd
- 
+
+# SSH
+# Root ssh Login wird deaktiviert
+sed -i '/PermitRootLogin/s/^/#/' /etc/ssh/sshd_config
+systemctl restart sshd
