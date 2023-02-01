@@ -11,6 +11,7 @@ apt --quiet update && apt --quiet --yes upgrade
 # Keymap setzen
 # Workaround für bekannten Debian Bug -> https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=790955
 wget https://mirrors.edge.kernel.org/pub/linux/utils/kbd/kbd-2.5.1.tar.gz -O /tmp/kbd-2.5.1.tar.gz
+cd /tmp/ && tar xzf kbd-2.5.1.tar.gz
 mkdir -p /usr/share/keymaps
 cp -Rp /tmp/kbd-2.5.1/data/keymaps/* /usr/share/keymaps/
 localectl set-keymap de-latin1
