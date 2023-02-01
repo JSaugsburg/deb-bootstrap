@@ -37,4 +37,4 @@ echo "$name:$pw" | chpasswd
 # SSH
 # Root ssh Login wird deaktiviert
 sed -i '/PermitRootLogin/s/^/#/' /etc/ssh/sshd_config
-systemctl restart sshd
+systemctl rerload sshd
