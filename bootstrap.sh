@@ -32,4 +32,5 @@ echo "$pw" > "/tmp/${name}_pw"
 # User kommt in sudoer Gruppe
 useradd -m -g sudo -s /bin/bash "$name" >/dev/null 2>&1 ||
   usermod -a -G sudo "$name" && mkdir -p /home/"$name" && chown "$name":sudo /home/"$name"
+echo "$name:$pw" | chpasswd
  
