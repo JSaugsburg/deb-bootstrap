@@ -38,3 +38,7 @@ echo "$name:$pw" | chpasswd
 # Root ssh Login wird deaktiviert
 sed -i '/PermitRootLogin/s/^/#/' /etc/ssh/sshd_config
 systemctl rerload sshd
+
+# Software
+# Emailwiz
+apt install certbot
