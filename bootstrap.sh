@@ -37,7 +37,33 @@ echo "$name:$pw" | chpasswd
 # SSH
 # Root ssh Login wird deaktiviert
 sed -i '/PermitRootLogin/s/^/#/' /etc/ssh/sshd_config
-systemctl rerload sshd
+systemctl reload sshd
+
+# keepass per sftp
+# https://blog.huggenknubbel.de/die-keepass-datenbank-immer-und-ueberall-synchron-halten
+setupkeepass () {
+  
+
+echo "SFTP einrichten? (y/n)"
+select yn in "y" "n"; do
+    case $yn in
+        y)
+        useradd -M sftpuser -s /bin/false >/dev/null 2>&1
+        read -p "Passwort für sftpuser angeben: " pw
+        echo "$name:$pw" | chpasswd
+        echo "Match User sftpuser" >> /etc/ssh/sshd_config
+        echo -e "\tPasswordAuthentication yes" >> /etc/ssh/sshd_config
+        echo -e "\tForceCommand internal-sftp" >> /etc/ssh/sshd_config
+        echo -e "\tChrootDirectory /%h" >> /etc/ssh/sshd_config
+        echo -e "\tAllowTCPForwarding no" >> /etc/ssh/sshd_config
+        sed -i 's,/usr/lib/openssh/sftp-server,internal-sftp,' /etc/ssh/sshd_config
+        mkdir /home/sftpuser/sftpuser
+        chown sftpuser:sftpuser /home/sftpuser/sftpuser
+        chmod 755 /home/sftpuser
+        ;;
+        n ) exit;;
+    esac
+done
 
 # Software
 # Emailwiz
