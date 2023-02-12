@@ -48,7 +48,7 @@ select yn in "y" "n"; do
         y )
         useradd -M sftpuser -s /bin/false >/dev/null 2>&1
         read -p "Passwort für sftpuser angeben: " pw
-        echo "$name:$pw" | chpasswd
+        echo "sftpuser:$pw" | chpasswd
         echo "Match User sftpuser" >> /etc/ssh/sshd_config
         echo -e "\tPasswordAuthentication yes" >> /etc/ssh/sshd_config
         echo -e "\tForceCommand internal-sftp" >> /etc/ssh/sshd_config
