@@ -45,7 +45,7 @@ systemctl reload sshd
 echo "SFTP einrichten? (y/n)"
 select yn in "y" "n"; do
     case $yn in
-        y)
+        y )
         useradd -M sftpuser -s /bin/false >/dev/null 2>&1
         read -p "Passwort für sftpuser angeben: " pw
         echo "$name:$pw" | chpasswd
@@ -58,7 +58,7 @@ select yn in "y" "n"; do
         mkdir /home/sftpuser/sftpuser
         chown sftpuser:sftpuser /home/sftpuser/sftpuser
         chmod 755 /home/sftpuser
-        ;;
+        break ;;
         n ) exit;;
     esac
 done
