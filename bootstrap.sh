@@ -41,8 +41,6 @@ systemctl reload sshd
 
 # keepass per sftp
 # https://blog.huggenknubbel.de/die-keepass-datenbank-immer-und-ueberall-synchron-halten
-setupkeepass () {
-  
 
 echo "SFTP einrichten? (y/n)"
 select yn in "y" "n"; do
@@ -54,7 +52,7 @@ select yn in "y" "n"; do
         echo "Match User sftpuser" >> /etc/ssh/sshd_config
         echo -e "\tPasswordAuthentication yes" >> /etc/ssh/sshd_config
         echo -e "\tForceCommand internal-sftp" >> /etc/ssh/sshd_config
-        echo -e "\tChrootDirectory /%h" >> /etc/ssh/sshd_config
+        echo -e "\tChrootDirectory %h" >> /etc/ssh/sshd_config
         echo -e "\tAllowTCPForwarding no" >> /etc/ssh/sshd_config
         sed -i 's,/usr/lib/openssh/sftp-server,internal-sftp,' /etc/ssh/sshd_config
         mkdir /home/sftpuser/sftpuser
