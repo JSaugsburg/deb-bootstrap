@@ -55,8 +55,8 @@ select yn in "y" "n"; do
         echo -e "\tChrootDirectory %h" >> /etc/ssh/sshd_config
         echo -e "\tAllowTCPForwarding no" >> /etc/ssh/sshd_config
         sed -i 's,/usr/lib/openssh/sftp-server,internal-sftp,' /etc/ssh/sshd_config
-        mkdir -p /home/sftpuser/sftpuser
-        chown sftpuser:sftpuser /home/sftpuser/sftpuser
+        mkdir -p /home/sftpuser/uploads
+        chown sftpuser:sftpuser /home/sftpuser/uploads
         chmod 755 /home/sftpuser
         break ;;
         n ) exit;;
@@ -65,4 +65,9 @@ done
 
 # Software
 # Emailwiz
-apt install certbot
+apt-get install -y certbot
+
+cd /tmp
+curl -LO lukesmith.xyz/emailwiz.sh
+chmod 755 emailwiz.sh
+./emailwiz.sh
