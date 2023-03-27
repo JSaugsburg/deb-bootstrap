@@ -56,7 +56,7 @@ select yn in "y" "n"; do
         echo -e "\tAllowTCPForwarding no" >> /etc/ssh/sshd_config
         sed -i 's,/usr/lib/openssh/sftp-server,internal-sftp,' /etc/ssh/sshd_config
         mkdir -p /home/sftpuser/uploads
-        chown sftpuser:sftpuser /home/sftpuser/uploads
+        chown -R sftpuser:sftpuser /home/sftpuser/uploads
         chmod 755 /home/sftpuser
         break ;;
         n ) exit;;
